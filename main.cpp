@@ -15,7 +15,7 @@
 int main()
 {
 	// Abstract factory
-
+/*
 	Factory* factory = 0;
 #ifdef MOTIF
 	factory = new MotifFactory();
@@ -25,8 +25,10 @@ int main()
 	factory->CreateButton()->draw();
 	factory->CreateWindow()->draw();
 	getchar();
+*/
 
 	// static factory method
+/*
 	std::vector<Stooge*> Vec;
 	std::cout << "1, 2, 0 ?" << std::endl;
 	while (true)
@@ -42,12 +44,28 @@ int main()
 	for (size_t i = 0; i < Vec.size(); i++)
 		delete Vec[i];
 	getchar();
+*/
 
 	// Framework
+/*
 	MyApp myApp;
 	myApp.NewDocument("foo");
 	myApp.NewDocument("bar");
 	myApp.ReportDocs();
+	getchar();
+*/
+
+	// Prototype
+	std::cout << "Start!" << std::endl;
+	const int NUM = 8;
+	ImageType Input[NUM] = {  Sat, Sat, Sat, Spot, Sat, Spot, Spot, Sat };
+	Image* Images[NUM];
+	for (int i = 0; i < NUM; i++ )
+		Images[i] = Image::findAndClone(Input[i]);
+	for (int i = 0; i< NUM; i++ )
+		Images[i]->draw();
+	for (int i = 0; i< NUM; i++)
+		delete Images[i];
 	getchar();
 	return 0;
 }
