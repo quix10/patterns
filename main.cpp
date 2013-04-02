@@ -63,9 +63,22 @@ int main()
 	for (int i = 0; i < NUM; i++ )
 		Images[i] = Image::findAndClone(Input[i]);
 	for (int i = 0; i< NUM; i++ )
-		Images[i]->draw();
+	{
+		Image* p = Images[i];
+		if (p)
+			Images[i]->draw();
+		else
+			std::cout << "Null pointer!" << std::endl;
+	}
+
 	for (int i = 0; i< NUM; i++)
-		delete Images[i];
+	{
+		Image* p = Images[i];
+		if (p)
+			delete p;
+		else
+			std::cout << "Null pointer!" << std::endl;
+	}
 	getchar();
 	return 0;
 }

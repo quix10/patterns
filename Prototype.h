@@ -43,9 +43,12 @@ int Image::_nextImage = 0;
 
 Image* Image::findAndClone(ImageType type)
 {
-	for (int i = 0; i < _nextImage; _nextImage++)
-		if (type == _prototypes[i]->getType())
+	for (int i = 0; i < _nextImage; i++)
+	{
+		const ImageType tmpType = _prototypes[i]->getType();
+		if (type == tmpType)
 			return _prototypes[i]->clone();
+	}
 	return 0;
 };
 
@@ -63,7 +66,7 @@ protected:
 	{
 		return new SatImage(1);
 	}
-	const ImageType getType() const
+	virtual const ImageType getType() const
 	{
 		return Sat;
 	}
@@ -73,10 +76,11 @@ private:
 		_id = _count++;
 		std::cout << "Sat(" << _id << ")" << std::endl;
 	}
-	SatImage()
+	SatImage() : _type(Sat)
 	{
 		addPrototype(this);
 	}
+	ImageType _type;
 	static SatImage _satImage;
 	int _id;
 	static int _count;
@@ -98,7 +102,7 @@ protected:
 	{
 		return new SpotImage(1);
 	}
-	const ImageType getType() const
+	virtual const ImageType getType() const
 	{
 		return Spot;
 	}
@@ -108,11 +112,12 @@ private:
 		_id = _count++;
 		std::cout << "Spot(" << _id << ")" << std::endl;
 	}
-	SpotImage()
+	SpotImage() : _type(Spot)
 	{
 		addPrototype(this);
 	}
 
+	ImageType _type;
 	int _id;
 	static int _count;
 	static SpotImage _spotImage;
